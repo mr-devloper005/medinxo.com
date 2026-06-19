@@ -6,7 +6,7 @@ import type { TaskKey } from '@/lib/site-config'
 import { SITE_CONFIG } from '@/lib/site-config'
 import { pagesContent } from '@/editable/content/pages.content'
 import { editableDesignContract as dc } from '@/editable/layouts/design-contract'
-import { CompactIndexCard, getEditableExcerpt, getEditablePostImage, postHref, RailPostCard } from '@/editable/cards/PostCards'
+import { CompactIndexCard, getEditableCategory, getEditableExcerpt, getEditablePostImage, postHref, RailPostCard } from '@/editable/cards/PostCards'
 
 type HomeSectionProps = {
   primaryTask: TaskKey
@@ -23,10 +23,10 @@ export function EditableHomeHero({ primaryTask, primaryRoute, posts }: HomeSecti
   const lead = posts[0]
   const side = posts.slice(1, 3)
   const trending = posts.slice(3, 8)
-  const heroTitle = pagesContent.home.hero.title.join(' ') || `${SITE_CONFIG.name}: independent stories, culture, and perspective.`
+  const heroTitle = pagesContent.home.hero.title.join(' ') || `${SITE_CONFIG.name}: media distribution, campaign visibility, and publication updates.`
 
   return (
-    <section className="border-b border-black/20 bg-[var(--slot4-surface-bg)]">
+    <section className="border-b border-black/10 bg-[var(--slot4-surface-bg)]">
       <div className={`${dc.shell.section} py-8 sm:py-10`}>
         {!lead ? (
           <div className="grid min-h-[520px] items-end bg-black p-8 text-white sm:p-12 lg:grid-cols-[1fr_.55fr]">
@@ -38,21 +38,18 @@ export function EditableHomeHero({ primaryTask, primaryRoute, posts }: HomeSecti
             </div>
           </div>
         ) : (
-          <div className="grid gap-px bg-black/20 lg:grid-cols-[.72fr_1.48fr_.7fr]">
-            <div className="grid gap-px bg-black/20">
+          <div className="grid gap-5 lg:grid-cols-[.72fr_1.48fr_.7fr]">
+            <div className="grid gap-5">
               {side.map((post, index) => (
-                <Link key={post.id} href={postHref(primaryTask, post, primaryRoute)} className="group relative min-h-[270px] overflow-hidden bg-black text-white">
-                  <img src={getEditablePostImage(post)} alt={post.title} className="absolute inset-0 h-full w-full object-cover opacity-65 transition duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_15%,rgba(0,0,0,.9))]" />
-                  <div className="absolute inset-x-0 bottom-0 p-5">
-                    <p className="text-[10px] font-black uppercase tracking-[.18em] text-white/65">{index === 0 ? 'Spotlight' : 'Culture desk'}</p>
-                    <h2 className="mt-2 text-2xl font-black leading-[1.02] tracking-[-.045em]">{post.title}</h2>
-                  </div>
+                <Link key={post.id} href={postHref(primaryTask, post, primaryRoute)} className="group editable-card block min-h-[250px] overflow-hidden border border-black/10 bg-[#f7f4ff] p-6 text-[#1c1b24]">
+                  <p className="text-[10px] font-black uppercase tracking-[.18em] text-[var(--slot4-accent)]">{index === 0 ? 'Spotlight' : 'Distribution brief'}</p>
+                  <h2 className="mt-5 text-3xl font-black leading-[1.02] tracking-[-.045em]">{post.title}</h2>
+                  <p className="mt-4 line-clamp-4 text-sm leading-6 text-black/60">{getEditableExcerpt(post, 150)}</p>
                 </Link>
               ))}
             </div>
 
-            <Link href={postHref(primaryTask, lead, primaryRoute)} className="group relative min-h-[541px] overflow-hidden bg-[var(--slot4-accent)] text-white">
+            <Link href={postHref(primaryTask, lead, primaryRoute)} className="group editable-rise relative min-h-[541px] overflow-hidden rounded-[28px] bg-[var(--slot4-accent)] text-white">
               <img src={getEditablePostImage(lead)} alt={lead.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]" />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.84))]" />
               <div className="absolute inset-x-0 bottom-0 border-t-8 border-[var(--slot4-accent)] p-6 sm:p-9">
@@ -62,7 +59,7 @@ export function EditableHomeHero({ primaryTask, primaryRoute, posts }: HomeSecti
               </div>
             </Link>
 
-            <aside className="bg-[var(--slot4-surface-bg)] p-6">
+            <aside className="editable-card bg-[var(--slot4-surface-bg)] p-6">
               <div className="flex items-end justify-between border-b-4 border-black pb-3">
                 <h2 className="text-2xl font-black uppercase tracking-[-.04em]">Trending</h2>
                 <span className="text-[10px] font-black uppercase tracking-[.2em] text-[var(--slot4-accent)]">Now</span>
@@ -87,7 +84,7 @@ export function EditableStoryRail({ primaryTask, primaryRoute, posts }: HomeSect
         <div className="flex items-end justify-between gap-6 border-b-4 border-black pb-4">
           <div>
             <p className="text-[10px] font-black uppercase tracking-[.23em] text-[var(--slot4-accent)]">The daily edit</p>
-            <h2 className="mt-2 text-4xl font-black tracking-[-.055em]">Latest stories</h2>
+            <h2 className="mt-2 text-4xl font-black tracking-[-.055em]">Latest distribution briefs</h2>
           </div>
           <Link href={primaryRoute} className="hidden text-xs font-black uppercase tracking-[.14em] hover:text-[var(--slot4-accent)] sm:inline-flex">View all <ArrowRight className="ml-2 h-4 w-4" /></Link>
         </div>
@@ -104,31 +101,27 @@ export function EditableMagazineSplit({ primaryTask, primaryRoute, posts }: Home
   const portraits = posts.slice(9, 14).length ? posts.slice(9, 14) : posts.slice(1, 6)
   if (!feature) return null
   return (
-    <section className="bg-[var(--slot4-accent)] text-white">
+    <section className="bg-[#07050d] text-white">
       <div className={`${dc.shell.section} py-14 sm:py-20`}>
         <div className="flex items-end justify-between border-b border-white/50 pb-5">
           <div>
-            <p className="text-[10px] font-black uppercase tracking-[.24em] text-white/70">Essential reading</p>
-            <h2 className="mt-2 text-4xl font-black tracking-[-.055em] sm:text-5xl">Features</h2>
+            <p className="text-[10px] font-black uppercase tracking-[.24em] text-[#d7ff66]">Essential distribution reading</p>
+            <h2 className="mt-2 text-4xl font-black tracking-[-.055em] sm:text-5xl">Performance and reach</h2>
           </div>
           <span className="editorial-serif hidden text-2xl italic sm:block">Stories worth your time.</span>
         </div>
         <div className="mt-7 grid gap-5 lg:grid-cols-[1.55fr_.72fr_.72fr_.72fr]">
-          <Link href={postHref(primaryTask, feature, primaryRoute)} className="group relative min-h-[520px] overflow-hidden bg-black lg:row-span-2">
-            <img src={getEditablePostImage(feature)} alt={feature.title} className="absolute inset-0 h-full w-full object-cover opacity-90 transition duration-700 group-hover:scale-[1.025]" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_20%,rgba(0,0,0,.88))]" />
-            <div className="absolute inset-x-0 bottom-0 p-7">
-              <p className="text-[10px] font-black uppercase tracking-[.2em] text-white/70">Cover feature</p>
-              <h3 className="mt-3 text-4xl font-black leading-[.98] tracking-[-.055em]">{feature.title}</h3>
-            </div>
+          <Link href={postHref(primaryTask, feature, primaryRoute)} className="group editable-card relative min-h-[520px] overflow-hidden bg-[#242326] p-8 lg:row-span-2">
+            <p className="text-[10px] font-black uppercase tracking-[.2em] text-[#d7ff66]">Cover feature</p>
+            <h3 className="mt-10 text-5xl font-black leading-[.96] tracking-[-.06em]">{feature.title}</h3>
+            <p className="mt-6 max-w-xl text-base leading-8 text-white/65">{getEditableExcerpt(feature, 220)}</p>
+            <span className="absolute bottom-8 left-8 rounded-full bg-[var(--slot4-accent)] px-5 py-3 text-xs font-black uppercase tracking-[.14em]">Read feature</span>
           </Link>
           {portraits.slice(0, 5).map((post) => (
-            <Link key={post.id} href={postHref(primaryTask, post, primaryRoute)} className="group bg-black text-white">
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <img src={getEditablePostImage(post)} alt={post.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(0,0,0,.88))]" />
-                <h3 className="absolute inset-x-0 bottom-0 p-4 text-lg font-black leading-tight tracking-[-.035em]">{post.title}</h3>
-              </div>
+            <Link key={post.id} href={postHref(primaryTask, post, primaryRoute)} className="group editable-card bg-[#242326] p-5 text-white">
+              <p className="text-[10px] font-black uppercase tracking-[.18em] text-white/45">{getEditableCategory(post)}</p>
+              <h3 className="mt-5 text-xl font-black leading-tight tracking-[-.035em]">{post.title}</h3>
+              <p className="mt-4 line-clamp-4 text-sm leading-6 text-white/58">{getEditableExcerpt(post, 130)}</p>
             </Link>
           ))}
         </div>
@@ -152,14 +145,15 @@ export function EditableTimeCollections({ primaryTask, primaryRoute, posts, time
               <p className="text-[10px] font-black uppercase tracking-[.23em] text-[var(--slot4-accent)]">From the newsroom</p>
               <h2 className="mt-2 text-4xl font-black tracking-[-.055em]">More to discover</h2>
             </div>
-            <Link href={postHref(primaryTask, lead, primaryRoute)} className="group mt-6 grid border-b border-black/20 pb-7 sm:grid-cols-[1.1fr_.9fr]">
-              <div className="relative min-h-[330px] overflow-hidden bg-[var(--slot4-media-bg)]">
-                <img src={getEditablePostImage(lead)} alt={lead.title} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+            <Link href={postHref(primaryTask, lead, primaryRoute)} className="group mt-6 grid overflow-hidden rounded-[28px] border border-black/10 pb-0 sm:grid-cols-[1.1fr_.9fr]">
+              <div className="bg-[#efeaff] p-7 sm:p-9">
+                <p className="text-[10px] font-black uppercase tracking-[.2em] text-[var(--slot4-accent)]">Fast read</p>
+                <h3 className="mt-4 text-4xl font-black leading-[.98] tracking-[-.055em]">{lead.title}</h3>
+                <p className="mt-5 text-sm leading-7 text-black/60">{getEditableExcerpt(lead, 180)}</p>
               </div>
               <div className="bg-black p-7 text-white sm:p-9">
                 <p className="text-[10px] font-black uppercase tracking-[.2em] text-[var(--slot4-accent)]">Editor&apos;s pick</p>
-                <h3 className="mt-4 text-4xl font-black leading-[.98] tracking-[-.055em]">{lead.title}</h3>
-                <p className="mt-5 text-sm leading-7 text-white/70">{getEditableExcerpt(lead, 180)}</p>
+                <p className="mt-5 text-3xl font-black leading-tight tracking-[-.05em]">Campaign visibility, publisher context, and distribution learnings in one clean brief.</p>
               </div>
             </Link>
           </div>
