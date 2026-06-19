@@ -15,19 +15,19 @@ body {
 }
 
 *::selection {
-  background: var(--editorial-red) !important;
-  color: #fff !important;
-  -webkit-text-fill-color: #fff;
+  background: #d7ff66 !important;
+  color: #111 !important;
+  -webkit-text-fill-color: #111;
 }
 
 *::-moz-selection {
-  background: var(--editorial-red) !important;
-  color: #fff !important;
+  background: #d7ff66 !important;
+  color: #111 !important;
 }
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: #ebe7e1; }
-::-webkit-scrollbar-thumb { background: #171717; border: 2px solid #ebe7e1; }
+::-webkit-scrollbar-track { background: #eeedf2; }
+::-webkit-scrollbar-thumb { background: #1c1b24; border: 2px solid #eeedf2; }
 ::-webkit-scrollbar-thumb:hover { background: var(--editorial-red); }
 
 .editorial-brand,
@@ -79,7 +79,49 @@ body {
 .article-content li { margin: .5em 0; }
 .article-content img { width: 100%; margin: 2em 0; }
 
-input, textarea, select, button { border-radius: 0 !important; }
+input, textarea, select, button { font: inherit; }
+
+.editable-rise {
+  animation: editable-rise .72s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.editable-rise-delay {
+  animation: editable-rise .86s cubic-bezier(.2,.8,.2,1) .08s both;
+}
+
+.editable-float {
+  animation: editable-float 7s ease-in-out infinite;
+}
+
+.editable-marquee {
+  animation: editable-marquee 28s linear infinite;
+}
+
+.editable-card {
+  border-radius: 22px;
+  box-shadow: 0 24px 70px rgba(20, 14, 35, .08);
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+.editable-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 32px 90px rgba(36, 10, 80, .14);
+}
+
+@keyframes editable-rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes editable-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes editable-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 
 @media (max-width: 640px) {
   .article-content { font-size: 1.05rem; line-height: 1.72; }
