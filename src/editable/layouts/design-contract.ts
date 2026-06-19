@@ -1,23 +1,23 @@
 import type { CSSProperties } from 'react'
 
 export const editableRootStyle = {
-  '--slot4-page-bg': '#f7f4ef',
-  '--slot4-page-text': '#111111',
-  '--slot4-panel-bg': '#efeae3',
-  '--slot4-surface-bg': '#fffdfa',
-  '--slot4-muted-text': '#514e49',
-  '--slot4-soft-muted-text': '#77716a',
-  '--slot4-accent': '#c92f2f',
-  '--slot4-accent-fill': '#c92f2f',
-  '--slot4-accent-soft': '#f3d8d3',
-  '--slot4-dark-bg': '#111111',
+  '--slot4-page-bg': '#f6f5f7',
+  '--slot4-page-text': '#1c1b24',
+  '--slot4-panel-bg': '#edeaf2',
+  '--slot4-surface-bg': '#ffffff',
+  '--slot4-muted-text': '#5f5b6f',
+  '--slot4-soft-muted-text': '#817d8f',
+  '--slot4-accent': '#6b00f5',
+  '--slot4-accent-fill': '#6b00f5',
+  '--slot4-accent-soft': '#eee2ff',
+  '--slot4-dark-bg': '#07050d',
   '--slot4-dark-text': '#ffffff',
-  '--slot4-media-bg': '#e4e0da',
-  '--slot4-cream': '#f7f4ef',
-  '--slot4-warm': '#fffdfa',
-  '--slot4-lavender': '#c92f2f',
-  '--slot4-gray': '#ece9e4',
-  '--slot4-body-gradient': 'linear-gradient(180deg, #f7f4ef 0%, #fffdfa 52%, #eeeae4 100%)',
+  '--slot4-media-bg': '#e9e8ee',
+  '--slot4-cream': '#f6f5f7',
+  '--slot4-warm': '#ffffff',
+  '--slot4-lavender': '#6b00f5',
+  '--slot4-gray': '#ecebf0',
+  '--slot4-body-gradient': 'linear-gradient(180deg, #ffffff 0%, #f6f5f7 54%, #eceaf3 100%)',
 } as CSSProperties
 
 export const editablePalette = {
@@ -50,14 +50,14 @@ export const editablePalette = {
 export const editableDesignContract = {
   shell: {
     page: `min-h-screen ${editablePalette.pageBg} ${editablePalette.pageText}`,
-    section: 'mx-auto w-full max-w-[1440px] px-4 sm:px-6 lg:px-10',
+    section: 'mx-auto w-full max-w-[1240px] px-4 sm:px-6 lg:px-8',
     sectionY: 'py-12 sm:py-16 lg:py-20',
   },
   layout: {
     safeGrid: 'grid gap-px bg-black/15 md:grid-cols-2 xl:grid-cols-3',
     featureGrid: 'grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-start',
     rail: 'flex snap-x gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
-    minRailCard: 'w-[230px] shrink-0 snap-start sm:w-[260px]',
+    minRailCard: 'w-[260px] shrink-0 snap-start sm:w-[300px]',
   },
   type: {
     eyebrow: 'text-[11px] font-black uppercase tracking-[0.2em]',
@@ -73,7 +73,7 @@ export const editableDesignContract = {
   button: {
     primary: `inline-flex items-center justify-center gap-2 bg-[var(--slot4-dark-bg)] px-7 py-3.5 text-xs font-black uppercase tracking-[0.12em] text-white transition hover:bg-[var(--slot4-accent-fill)]`,
     secondary: `inline-flex items-center justify-center gap-2 border border-black/30 bg-transparent px-7 py-3.5 text-xs font-black uppercase tracking-[0.12em] text-black transition hover:bg-black hover:text-white`,
-    accent: `inline-flex items-center justify-center gap-2 bg-[var(--slot4-accent-fill)] px-7 py-3.5 text-xs font-black uppercase tracking-[0.12em] text-white transition hover:bg-black`,
+    accent: `inline-flex items-center justify-center gap-2 rounded-full bg-[var(--slot4-accent-fill)] px-7 py-3.5 text-xs font-black uppercase tracking-[0.12em] text-white transition hover:bg-black`,
   },
   media: {
     frame: `relative overflow-hidden ${editablePalette.mediaBg}`,
